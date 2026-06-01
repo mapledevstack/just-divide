@@ -1,6 +1,12 @@
 import cat from "../assets/Cat.png"
+import type { Grid } from "../types"
 
-const GameBoard = () => {
+type Props = {
+  grid: Grid
+  handlePlaceTile: (index: number) => void
+}
+
+const GameBoard = ({ grid, handlePlaceTile }: Props) => {
   return (
     <div className="board-section">
       
@@ -12,10 +18,14 @@ const GameBoard = () => {
       </div>
 
       <div className="grid">
-        {Array.from({length: 16}).map((_, index) => {
+        {grid.map((_, index) => {
           return (
-            <div className="cell" key={index}>
-              0
+            <div 
+              className="cell"
+              key={index}
+              onClick={() => handlePlaceTile(index)}
+            >
+              {grid[index]}
             </div>
           )
         })}

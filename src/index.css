@@ -4,115 +4,174 @@
   box-sizing: border-box;
 }
 
-body {
+html,
+#root {
+  width: 100vw;
   height: 100vh;
+  overflow: hidden;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 }
 
 .game {
-  width: min(100vw, 1440px);
-  aspect-ratio: 1440/1024;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
+  width: min(98vw, calc(98vh * (1440 / 1024)));
+  height: min(98vh, calc(98vw * (1024 / 1440)));
 
-.header-section {
-  width: 100%;
-  flex: 2;
-  background-color: red;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2rem;
-}
-
-.play-area {
-  width: 100%;
   background-image: url("./assets/Desktop_JustDivide_Game_2.png");
   background-size: 100% 100%;
   background-position: center;
 
-  flex: 8;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
 }
 
-.board-section {
-  flex: 6;
+.header-section {
+  flex: 1.5;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 0.5rem;
+}
+
+.play-area {
+  flex: 8.5;
+
+  display: flex;
+  align-items: center;
+
+  padding: 2%;
+  gap: 3%;
+}
+
+.board-section {
+  flex: 6;
   height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
 }
 
 .cat {
-  width: 850px;
+  width: 70%;
   height: auto;
-  transform: translateY(110px);
+
+  transform: translateY(5%);
   z-index: 3;
+  position: relative;
 }
 
 .badges {
+  width: 70%;
+
   display: flex;
   justify-content: space-between;
-  width: 80%;
+
+  transform: translateY(-30%);
   z-index: 2;
-  transform: translateY(50px);
+  position: relative;
 }
 
 .badge {
-  background-image: url("./assets/Levels\ and\ Score.png");
+  width: 40%;
+  aspect-ratio: 5 / 2;
+
+  background-image: url("./assets/Levels and Score.png");
   background-size: 100% 100%;
-  background-position: center;
 
   display: flex;
   justify-content: center;
   align-items: center;
+
   color: white;
-  font-size: 3rem;
-  text-align: center;
-  padding: 2rem;
+  font-size: 1.3rem;
+  font-weight: 700;
 }
 
 .grid {
-  width: 600px;
-  height: 600px;
+  width: 70%;
+  aspect-ratio: 1 / 1;
+
   background-image: url("./assets/Placement_Box.png");
   background-size: 100% 100%;
-  background-position: center;
 
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(4, 1fr);
+  grid-template-columns: repeat(4, 70px);
+  grid-template-rows: repeat(4, 70px);
 
-  gap: 10px;
-  padding: 60px;
-  padding-top: 100px;
-  transform: translateY(-40px);
+  gap: 1.6%;
+
+  padding-top: 18%;
+  padding-right: 10%;
+  padding-bottom: 10%;
+  padding-left: 10%;
+
+  transform: translateY(-20%);
+  position: relative;
+  z-index: 1;
 }
 
 .cell {
   background-image: url("./assets/Placement_Box.png");
   background-size: 100% 100%;
-  background-position: center;
 
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 
-  font-size: 2rem;
   color: white;
+  font-size: 2rem;
   font-weight: 800;
 }
 
 .action-panel-section {
   flex: 4;
-  background-color: blueviolet;
+  height: 100%;
+  width: 6rem;
+
+  background-color: gold;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5%;
+}
+
+.cell:hover {
+  transform: scale(1.05);
+}
+
+.queue {
+  display: flex;
+  gap: 1rem;
+}
+
+.keep {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.trash {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tile {
+  width: 6rem;
+  aspect-ratio: 1/1;
+  background-color: aqua;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3rem;
 }
