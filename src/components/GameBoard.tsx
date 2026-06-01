@@ -4,17 +4,19 @@ import type { Grid } from "../types"
 type Props = {
   grid: Grid
   handlePlaceTile: (index: number) => void
+  score: number
+  level: number
 }
 
-const GameBoard = ({ grid, handlePlaceTile }: Props) => {
+const GameBoard = ({ grid, handlePlaceTile, score, level }: Props) => {
   return (
     <div className="board-section">
       
       <img src={cat} alt="cat" className="cat" />
 
       <div className="badges">
-        <div className="badge">Level&nbsp;1</div>
-        <div className="badge">Score&nbsp;40</div>
+        <div className="badge">Level&nbsp;{level}</div>
+        <div className="badge">Score&nbsp;{score}</div>
       </div>
 
       <div className="grid">

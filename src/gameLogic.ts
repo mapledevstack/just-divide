@@ -61,10 +61,20 @@ export const handleMerge = (grid: Grid, placedIndex: number) => {
     newGrid[placedIndex] = result
     newGrid[neighbourIndex] = null
 
-    return {
-      grid: newGrid,
-      scoreGain: 1
+    if(newGrid[placedIndex] === null) {
+      return {
+        grid: newGrid,
+        scoreGain: 1
+      }
     }
+
+    const nextMerge:{grid: Grid, scoreGain: number} = handleMerge(newGrid, placedIndex)
+
+    return {
+      grid: nextMerge.grid,
+      scoreGain: nextMerge.scoreGain + 1
+    }
+
   }
 
   return {

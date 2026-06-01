@@ -1,13 +1,19 @@
-import type { GameState } from "../types"
+import { LucideTrash } from "lucide-react"
 
-type Props = Pick<GameState, "queue" | "keepVal" | "trashCount">
+type Props = {
+  queue: number[],
+  keepVal: number | null,
+  trashCount: number,
+  handleKeep: () => void,
+  handleTrash: () => void
+}
 
-const ActionPanel = ({ queue, keepVal, trashCount } : Props) => {
+const ActionPanel = ({ queue, keepVal, trashCount, handleKeep, handleTrash } : Props) => {
   return (
     <div className="action-panel-section">
       
       <div className="keep">
-        <p className="tile">{keepVal}</p>
+        <p className="tile" onClick={() => handleKeep()}>{keepVal}</p>
         <p>KEEP</p>
       </div>
 
@@ -17,8 +23,10 @@ const ActionPanel = ({ queue, keepVal, trashCount } : Props) => {
       </div>
 
       <div className="trash">
-        <p className="tile">{trashCount}</p>
-        <p>TRASH</p>
+        <p className="tile" onClick={() => handleTrash()}>
+          <LucideTrash />
+        </p>
+        <p>TRASH x {trashCount}</p>
       </div>
 
     </div>

@@ -24,15 +24,49 @@ const App = () => {
     newGrid[index] = activeTile
 
     const { grid, scoreGain } = handleMerge(newGrid, index)
-
-    setGameState(prev => (
-      {
+    
+    setGameState(prev => {
+      const score = prev.score + scoreGain
+      return {
         ...prev,
         grid,
         queue: moveQueue(prev.queue),
-        score: prev.score + scoreGain
+        score,
+        level: Math.floor(score / 10) + 1
       }
-    ))
+    })
+  }
+
+  const handleKeep = () => {
+    setGameState(prev => {
+      if(prev.keepVal === null) {
+        return {
+          ...prev,
+          keepVal: prev.queue[0],
+          queue: moveQueue(prev.queue)
+        }
+      }
+
+      return {
+        ...prev,
+        keepVal: prev.queue[0],
+        queue: [prev.keepVal, prev.queue[1]]
+      }
+    })
+  }
+
+  const handleTrash = () => {
+    setGameState(prev => {
+      if(prev.trashCount <= 0) {
+        return prev
+      }
+
+      return {
+        ...prev,
+        queue: moveQueue(prev.queue),
+        trashCount: prev.trashCount - 1
+      }
+    })
   }
 
   return (
@@ -40,8 +74,9 @@ const App = () => {
       <GameHeader />
 
       <div className="play-area">
-        <GameBoard grid={gameState.grid} handlePlaceTile={handlePlaceTile} />
-        <ActionPanel queue={gameState.queue} keepVal={gameState.keepVal} trashCount={gameState.trashCount} />
+        <GameBoard grid={gameState.grid} handlePlaceTile={handlePlaceTile} score={gameState.score} level={gameState.level} />
+
+        <ActionPanel queue={gameState.queue} keepVal={gameState.keepVal} trashCount={gameState.trashCount} handleKeep={handleKeep} handleTrash={handleTrash} />
       </div>
     </div>
   )
